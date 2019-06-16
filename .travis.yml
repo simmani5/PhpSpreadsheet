@@ -21,10 +21,16 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
+before_install:
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then composer require --dev --no-update phpunit/phpunit ^8.0; fi
+
+install:
+  - travis_retry composer install --no-interaction --ignore-platform-reqs
+
 before_script:
   # Deactivate xdebug
   - if [ -z "$KEEP_XDEBUG" ]; then rm -rfv /home/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ; fi
-
+  - composer install --ignore-platform-reqs
 
 script:
   - ./vendor/bin/phpunit
