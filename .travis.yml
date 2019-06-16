@@ -22,7 +22,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then composer require --dev --no-update phpunit/phpunit ^8.0; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.4" ]]; then composer require --dev --no-update phpunit/phpunit ^8.0; fi
 
 install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
