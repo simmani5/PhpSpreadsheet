@@ -24,18 +24,13 @@ cache:
 before_script:
   # Deactivate xdebug
   - if [ -z "$KEEP_XDEBUG" ]; then rm -rfv /home/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ; fi
-  - composer install --ignore-platform-reqs
+  - composer install
 
 script:
   - ./vendor/bin/phpunit
 
 jobs:
   include:
-    - stage: Test
-      php: 7.4snapshot
-      script:
-        - composer require --dev phpunit/phpunit:^8.0
-
     - stage: Code style
       php: 7.2
       script:
